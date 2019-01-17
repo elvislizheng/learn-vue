@@ -31,7 +31,8 @@
     <button v-on:click="reverseMessage">Reverse Message</button>
 </div>
 <div id="app-6">
-    <p>{{message}}</p>
+    <strong>app-6</strong>
+    <p>{{reverseMessage}}</p>
     <input v-model="message" />
 
     <ol>
@@ -40,8 +41,23 @@
 
 </div>
 
+<div id="app-7">
+    <strong>app-7</strong>
+    <p>{{reverseMessage}}</p>
+    <input v-model="message" />
 
+    <ol>
+        <todo-item v-for="item in todos" v-bind:todo="item" v-bind:key="item.id"></todo-item>
+    </ol>
 
+</div>
+<div id="example-1">
+<ul>
+    <li v-for="item in items" :key="item.id">
+        {{item.message}}
+    </li>
+</ul>
+</div>
 </body>
 </html>
 
@@ -102,11 +118,29 @@
                 { text: 'Build something awesome' }
             ]
         },
+        computed:{
+            reverseMessage: function () {
+                return this.message.split('').reverse().join('')
+            }
+        },
         created: function(){
             console.log(this.message)
         }
     })
-
+    console.log(app6.reverseMessage);
+    app6.message = 'app6';
+    console.log(app6.reverseMessage);
+    var example1 = new Vue({
+        el: '#example-1',
+        data:{
+            items: [
+                {message: "message 1"},
+                {message: "message 2"},
+                {message: "message 3"}
+            ]
+        }
+    })
+    example1.$set(example1.items, 1, {message: 'new 2'})
 
 
 
